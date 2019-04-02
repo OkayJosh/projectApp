@@ -8,12 +8,27 @@
 
   {% block content %}
   <div class="container">
-    <ul>
-    {% for project in object_list %}
-       <li>{{ project }} </li>
-    {% endfor %}
-    </ul>
+       <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Actions</th>
+                </tr>
+                <tr>
+                    <th><i class="material-icons">edit</i></th>
+                    <th>Subproject</th>
+                    <th>members</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for project in object_list %}
+                    <tr>
+                        <td>{{ project }} </td>
+                        <td><a><i class="material-icons">loupe</i></a></td>
+                        <td><a><i class="material-icons">person_add</i></a></td>
+                        </tr>
+                {% endfor %}
+        </table>
   </div>
 
   {% endblock content %}
- 
