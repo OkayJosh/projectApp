@@ -3,8 +3,10 @@
   {% block heading %}
   <div class="container"> 
     <h1>Project Management!</h1>
-    <h5><a href={% url 'create' %} class="">create project</a></h5>
-    <h5><a href={% url 'projectlist' %} class="">created projects</a></h5>
+    <div class="wrap">
+        <h5><a href={% url 'create' %} class="btn-floating btn-large pulse pink darken-1"><i class="material-icons">add_circle</i></a></h5>
+        <h5><a href={% url 'projectlist' %} class="btn-floating pink darken-1"><i class="material-icons">format_list_bulleted</i></a></h5> 
+    </div>
   </div>
 
   {% endblock heading %}
