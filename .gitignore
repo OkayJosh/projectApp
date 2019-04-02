@@ -1,5 +1,5 @@
 /project
 */migrations
-db.sqlite
+/db.sqlite
 *.pyc
 */__pycache__
