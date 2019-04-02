@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
   {% block heading %}
-      <h1>Project Management!</h1>
+  <div class="container"> 
+    <h1>Project Management!</h1>
+    <h5><a href={% url 'create' %} class="">create project</a></h5> 
+  </div>
+
   {% endblock heading %}

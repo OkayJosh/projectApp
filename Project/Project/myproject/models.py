@@ -3,13 +3,16 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class Project(models.Model):
-    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     code_num = models.IntegerField()
     id_num = models.IntegerField()
     pname = models.CharField(max_length=300)
     _class = models.CharField(max_length=300)
     des = models.TextField()
     owner = models.CharField(max_length=300)
+
+    def __str__(self):
+        return self.pname
 
 class SubProject(models.Model):
     owned_by = models.ForeignKey(Project, on_delete=models.CASCADE)

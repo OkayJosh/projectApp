@@ -18,6 +18,7 @@
     <div class="nav-wrapper pink darken-1">
       <a href="{% url 'home' %}" class="brand-logo"><i class="material-icons">person_pin</i></a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="">login</a></li>
         {% comment %} <li><a href="{% url 'login' %}">login</a></li> {% endcomment %}
         <li><a href="">Signup</a></li>
         <li><a href="">About</a></li>
@@ -25,7 +26,9 @@
     </div>
   </nav>
   {% block heading %}
-      <h1>Django-Africa demo for login!</h1>
+    <div class="container">
+        <h1>Django-Africa demo for login!</h1>
+    </div>
   {% endblock heading %}
 
   {% block content %}
