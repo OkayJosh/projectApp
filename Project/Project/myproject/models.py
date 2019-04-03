@@ -16,33 +16,32 @@ class Project(models.Model):
 
 class SubProject(models.Model):
     owned_by = models.ForeignKey(Project, on_delete=models.CASCADE)
-    code_num = models.IntegerField()
-    id_num = models.IntegerField()
+    spname = models.CharField(max_length=300, default="no name") #------------> sub project name
+    scode_num = models.IntegerField() #-------------->                          Sub project code number
+    sid_num = models.IntegerField() #-------------->                            Sub project identification number
     cost = models.IntegerField()
-    benefit = models.TextField()
-    e_start_date = models.DateField() # ------> Estimated start time
+    benefit = models.TextField() #-------------->                               The benefit of the project
+    e_start_date = models.DateField() # ------>                                 Estimated start time
     e_close_date = models.DateField()
-    a_start_date = models.DateField()   # ----->  Actual start time
+    a_start_date = models.DateField()   # ----->                                Actual start time
     a_close_date = models.DateField()
-    leader = models.CharField(max_length=300)
+    leader = models.CharField(max_length=300) #----------->                     The leader of the subproject
 
 class SubProjectAppriasal (models.Model):
-    code_num = models.IntegerField()
-    id_num = models.IntegerField()
-    sid_num = models.IntegerField() #----> subproject identification number
-    ap_date = models.DateField()    #----> appriases date
+    owned_by = models.OneToOneField(SubProject, on_delete=models.CASCADE) 
+    ap_date = models.DateField()    #---->                                      appriases date
     delay_reason = models.TextField()  
-    r_action = models.TextField()   # ----> remedial action taken
-    a_name = models.CharField(max_length=300) # appriaser's name
+    r_action = models.TextField()   # ---->                                     remedial action taken
+    a_name = models.CharField(max_length=300) #                                 appriaser's name
 
 class SubProjectCloseout (models.Model):
-    code_num = models.IntegerField()
+    owned_by = models.OneToOneField(SubProject, on_delete=models.CASCADE) 
     id_num = models.IntegerField()
-    sid_num = models.IntegerField() #----> subproject identification number
+    sid_num = models.IntegerField() #---->                                      subproject identification number
     close_num = models.IntegerField()
-    c_date = models.DateField()    #----> closeout date
-    remark = models.TextField()
-    a_name = models.CharField(max_length=300) # appriaser's name
+    c_date = models.DateField()    #---->                                       closeout date
+    remark = models.TextField() #
+    a_name = models.CharField(max_length=300) #                                 appriaser's name
 
 
 

@@ -8,3 +8,5 @@ class ProjectForm(ModelForm):
         fields = ['code_num', 'id_num', 'pname',
                     '_class', 'des', 'owner']
         exclude = ['created_by',]
+
+        field_classes = "pink darken-1"
