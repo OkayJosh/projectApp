@@ -6,13 +6,16 @@ class Project(models.Model):
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     code_num = models.IntegerField()#--------------->                                           Project Code number FGN or STA
     id_num = models.IntegerField()  #--------->                                                 Project main identification Number
-    pname = models.CharField(max_length=300)# --------------->                                  Project name
+    slug = models.SlugField(max_length=300,
+                            verbose_name = "slug",
+                            allow_unicode = True,
+                            unique=True, default="This-is-a-new-project-title-edit-this")# --------------->                                  Project name
     _class = models.CharField(max_length=300) #----------------->                               Classification of project
     des = models.TextField()                   #------------->                                  Description of project
     owner = models.CharField(max_length=300) #----------------------->                          Owner of the projec: the agency
 
     def __str__(self):
-        return self.pname
+        return self.slug
 
 class SubProject(models.Model):
     """
@@ -37,7 +40,7 @@ class SubProjectAppriasal (models.Model):
     This models the supproject appriasal info
 
     """
-    owned_by = models.OneToOneField(SubProject, on_delete=models.CASCADE) 
+    owned_by = models.OneToOneField(SubProject, on_delete=models.CASCADE, blank=True, null=True) 
     ap_date = models.DateField()    #---->                                      appriases date
     delay_reason = models.TextField()  
     r_action = models.TextField()   # ---->                                     remedial action taken
@@ -48,7 +51,7 @@ class SubProjectCloseout (models.Model):
     This models the supproject closeout info
 
     """
-    owned_by = models.OneToOneField(SubProject, on_delete=models.CASCADE) 
+    owned_by = models.OneToOneField(SubProject, on_delete=models.CASCADE, blank=True, null=True) 
     id_num = models.IntegerField()
     sid_num = models.IntegerField() #---->                                      subproject identification number
     close_num = models.IntegerField()
@@ -65,7 +68,7 @@ class ProjectFund(models.Model):
     name_funder = models.CharField(max_length=300) #--------->                   Name of the funding agency
     nature_funding = models.TextField()# ------------------->                    The nature of the funding
     amount = models.IntegerField()# ---------------------->                      Amount founded
-    currency = models.CharField()# --------------------->                        Currency of the funded amount
+    currency = models.CharField(max_length=300)# --------------------->                        Currency of the funded amount
 
     
 

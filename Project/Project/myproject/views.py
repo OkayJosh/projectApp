@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
-from django.views.generic import TemplateView, ListView
+from django.views.generic import TemplateView, ListView, DetailView
 from django.views.generic.edit import CreateView
 from .forms import ProjectForm
 from .models import Project
@@ -21,10 +21,24 @@ class CreateProjectView(CreateView):
     content_type = None 
 
     def form_valid(self, form):
-        """If the form is valid, save the associated model."""
+        """
+        If the form is valid, save the associated model.
+
+        """
         instance  = form.save(commit=False)
         instance.created_by = self.request.user
         instance.save()
         self.object = form.save()
         return super().form_valid(form)
 
+class ProfileProjectView(DetailView):
+    """
+    The goal is to have a one stop page for editing and veiwing project related information
+    
+    """
+    template_name = 'project/profile.html'
+    model = Project
+    content_type = None 
+    pk_url_kwarg = 'pk' 
+    query_pk_and_slug = True
+    slug_url_kwarg = 'slug'
