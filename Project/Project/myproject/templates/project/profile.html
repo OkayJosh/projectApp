@@ -1,25 +1,29 @@
 {% extends "base.html" %}
 
   {% block heading %}
-    <div class="container ">
+    <div class="row container">
         <div class=""> 
-            <h1 class="">Welcome to {{ object }} dashboard!</h1>
+            <h1 class=""><i class="material-icons large">dashboard</i>Welcome to {{ object }}</h1>
         </div>
     </div>
   {% endblock heading %}
   
   {% block content %}
     <div class="row">
-
-    <div class="container"> <h5>{{object.des}}  <i> Owned by: </i>{{object.owner}}</h5></div>
-        <div class="col-4">
-            <div class="container"> <h5>Project Code Number: {{object.code_num}} </h5></div>
-        </div>
-        <div class="col-4">
-            <div class="container"> <h5>Project identification Number: {{object.id_num}}</h5></div>
-        </div>
-        <div class="col-4">
-            {{object.class}}
+        <div class="container"><h5 class="bold">{{object.des}}<i> <i class="material-icons">person</i></i>{{object.owner}}
+            <h5><a href={% url 'subproject' object.pk %} class=""><i class="material-icons large">loupe</i></a>
+            <a href={% url 'list' %} class=""><i class="material-icons large">money</i></a>
+            <a href={% url 'list' %} class=""><i class="material-icons large">compare_arrows</i></a>
+            <a href={% url 'create' %} class=""><i class="material-icons large">close</i></a></h5>
+            <div class="col">
+                <div class=""><h5>Project Code Number: {{object.code_num}}</h5></div>
+            </div>
+            <div class="col">
+                <div class=""><h5>Project identification Number: {{object.id_num}}</h5></div>
+            </div>
+            <div class="col">  
+                <div class=""><h5>Project Classification: Hello world{% comment %}{{object._class}}{% endcomment %} </h5></div>
+            </div> 
         </div>
     </div>
   {% endblock content %}

@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 from .models import ( Project, SubProject, SubProjectAppriasal,
-                        SubProjectCloseout, ProjectFund)
+                        SubProjectCloseout, ProjectFund )
 
 
 class ProjectForm(ModelForm):
