@@ -12,23 +12,26 @@
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Actions</th>
+                    <th>    </th>
                 </tr>
                 <tr>
                     <th><i class="material-icons">edit</i></th>
-                    <th>Subproject</th>
-                    <th>members</th>
+                    <th>Identification Number</th>
+                    <th>Owner</th>
                 </tr>
             </thead>
             <tbody>
                 {% for project in object_list %}
                     <tr>
                         <td><a href="{% url 'profile' project.pk project.slug %}">{{ project }} </a> </td>
-                        <td><a><i class="material-icons large">loupe</i></a></td>
-                        <td><a><i class="material-icons large">person_add</i></a></td>
+                        <td><a><i class="">{{ project.id_num}}</i></a></td>
+                        <td><a><i class="">{{ project.owner}}</i></a></td>
                         </tr>
                 {% endfor %}
         </table>
   </div>
 
   {% endblock content %}
+
+
+{% comment %} This to still add includes pagination {% endcomment %}

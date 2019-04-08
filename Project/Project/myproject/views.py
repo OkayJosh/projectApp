@@ -32,6 +32,17 @@ class CreateProjectView(CreateView):
         self.object = form.save()
         return super().form_valid(form)
 
+# class ProjectDetailView(DetailView)
+# class SubProjectDetailView(DetailView)
+# class SubProjectAppriasalDetailView(DetailView)
+# class SubProjectCloseoutDetailView(DetailView)
+# class ProjectFundDetailView(DetailView)
+
+# class ProfileProjectView(ProjectDetailView, SubProjectDetailView,
+#         SubProjectAppriasalDetailView, SubProjectCloseoutDetailView,
+#         ProjectFundDetailView):
+
+
 class ProfileProjectView(DetailView):
     """
     The goal is to have a one stop page for editing and veiwing project related information
@@ -88,3 +99,5 @@ class CreateProjectFund(CreateView):
 
 class UpdateProjectFund(UpdateView):
         template_name ='project/updatefund.html'
+
+### i still need to implement a way in which the subproject scope will get the project in question
