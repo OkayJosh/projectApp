@@ -35,7 +35,7 @@ class SubProject(models.Model):
     a_close_date = models.DateField()
     leader = models.CharField(max_length=300) #----------->                     The leader of the subproject
 
-class SubProjectAppriasal (models.Model):
+class SubProjectAppriasal(models.Model):
     """
     This models the supproject appriasal info
 
@@ -46,7 +46,7 @@ class SubProjectAppriasal (models.Model):
     r_action = models.TextField()   # ---->                                     remedial action taken
     a_name = models.CharField(max_length=300) #                                 appriaser's name
 
-class SubProjectCloseout (models.Model):
+class SubProjectCloseout(models.Model):
     """
     This models the supproject closeout info
 

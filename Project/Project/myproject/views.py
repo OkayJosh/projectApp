@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.views.generic import TemplateView, ListView, DetailView
-from django.views.generic.edit import CreateView
-from .forms import ProjectForm, SubProjectForm
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from .forms import (ProjectForm, SubProjectForm, SubProjectAppriasalForm,
+                    SubProjectCloseoutForm, ProjectFundForm)
 from .models import Project, SubProject
 
 
@@ -60,3 +61,30 @@ class CreateSubProjectView(CreateView):
         instance.save()
         self.object = form.save()
         return super().form_valid(form)
+
+class CreateSubProjectAppriasal(CreateView):
+        template_name = 'subproject/appriasal.html'
+        form_class =  SubProjectAppriasalForm
+        success_url = 'project'
+        content_type = None 
+
+class UpdateSubProjectAppriasal(UpdateView):
+        template_name = 'subproject/updateappriasal.html'
+
+class CreateSubProjectCloseout(CreateView):
+        template_name = 'subproject/closeout.html'
+        form_class =  SubProjectCloseoutForm
+        success_url = 'project'
+        content_type = None 
+
+class UpdateSubProjectCloseout(UpdateView):
+        template_name = 'subproject/updatecloseout.html'
+
+class CreateProjectFund(CreateView):
+        template_name ='project/fund.html'
+        form_class =  ProjectFundForm
+        success_url = 'project'
+        content_type = None 
+
+class UpdateProjectFund(UpdateView):
+        template_name ='project/updatefund.html'
