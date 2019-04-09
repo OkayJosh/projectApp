@@ -25,5 +25,5 @@ urlpatterns = [
 
     path('create/project/', ListProjectView.as_view(), name='list'),
 
-    path('create/project/fund/', CreateProjectFund.as_view(), name='fund'),
+    path('create/project/fund/<int:pk>/', CreateProjectFund.as_view(), name='fund'),
 ]

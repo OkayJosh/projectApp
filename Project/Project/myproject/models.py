@@ -19,7 +19,7 @@ class Project(models.Model):
 
 class SubProject(models.Model):
     """
-    This models the Project Registration info
+    This models the SubProject Registration info
 
     """
     owned_by = models.ForeignKey(Project, on_delete=models.CASCADE)
@@ -61,7 +61,7 @@ class SubProjectCloseout(models.Model):
 
 class ProjectFund(models.Model):
     """
-    This models who will fund the project
+    This models funding for the project
 
     """
     owned_by = models.OneToOneField(Project, on_delete=models.CASCADE)

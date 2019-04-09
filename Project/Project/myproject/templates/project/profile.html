@@ -10,11 +10,11 @@
   
   {% block content %}
     <div class="row">
-        <div class="container"><h5 class="bold">{{object.des}}<i> <i class="material-icons">person</i></i>{{object.owner}}
+        <div class="container"><h5 class="bold">{{object.des}}<i> <i class="material-icons">person</i></i>{{object.owner}} <br>
             <h5><a href={% url 'subproject' object.pk %} class=""><i class="material-icons large">loupe</i></a>
-            <a href={% url 'fund' %} class=""><i class="material-icons large">money</i></a>
-            <a href={% url 'appriasal' %} class=""><i class="material-icons large">compare_arrows</i></a>
-            <a href={% url 'closeout' %} class=""><i class="material-icons large">close</i></a></h5>
+            <a href={% url 'fund' object.pk %} class=""><i class="material-icons large">money</i></a>
+            {% comment %} <a href={% url 'appriasal' %} class=""><i class="material-icons large">compare_arrows</i></a>
+            <a href={% url 'closeout' %} class=""><i class="material-icons large">close</i></a></h5> {% endcomment %}
             <div class="col">
                 <div class=""><h5>Project Code Number: {{object.code_num}}</h5></div>
             </div>
@@ -25,5 +25,29 @@
                 <div class=""><h5>Project Classification: Hello world{% comment %}{{object._class}}{% endcomment %} </h5></div>
             </div> 
         </div>
+    </div>
+{% comment %} List of subprojects {% endcomment %}
+    <div class="container">
+        <table>
+                <thead>
+                    <tr>
+                        <th>Sub Projects</th>
+                        <th>    </th>
+                    </tr>
+                    <tr>
+                        <th>Name</i></th>
+                        <th>Appraise</th>
+                        <th>close</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for project in object_list %}
+                        <tr>
+                            <td><a href="{% url 'profile' project.pk project.slug %}">{{ project }} </a> </td>
+                            <td><a><i class="">{{ project.id_num}}</i></a></td>
+                            <td><a><i class="">{{ project.owner}}</i></a></td>
+                            </tr>
+                    {% endfor %}
+            </table>
     </div>
   {% endblock content %}
