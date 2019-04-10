@@ -17,7 +17,7 @@ urlpatterns = [
     path('create/subproject/closeout/', CreateSubProjectCloseout.as_view(), 
     name='closeout'),
 
-    path('create/subproject/<int:pk>/', CreateSubProjectView.as_view(), 
+    path('create/subproject/<int:pk>/<str:slug>/', CreateSubProjectView.as_view(), 
     name='subproject'),
 
     path('create/profile/<int:pk>/<str:slug>/', ProfileProjectView.as_view(), 
@@ -25,5 +25,5 @@ urlpatterns = [
 
     path('create/project/', ListProjectView.as_view(), name='list'),
 
-    path('create/project/fund/<int:pk>/', CreateProjectFund.as_view(), name='fund'),
+    path('create/project/fund/<int:pk>/<str:slug>/', CreateProjectFund.as_view(), name='fund'),
 ]

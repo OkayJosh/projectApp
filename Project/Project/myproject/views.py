@@ -1,6 +1,7 @@
 from django.shortcuts import render
+from django.urls import reverse
 from django.contrib.auth.models import User
-from django.views.generic import TemplateView, ListView, DetailView
+from django.views.generic import TemplateView, ListView, DetailView, RedirectView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .forms import (ProjectForm, SubProjectForm, SubProjectAppriasalForm,
                     SubProjectCloseoutForm, ProjectFundForm)
@@ -59,9 +60,23 @@ class ProfileProjectView(DetailView):
 class CreateSubProjectView(CreateView):
         template_name = 'subproject/create.html'
         form_class =  SubProjectForm
-        success_url = '/create/project'
         content_type = None
-        pk_url_kwarg = 'pk'  
+        pk_url_kwarg = 'pk'
+        slug_url_kwarg = 'slug'
+        success_url = '/create/project'
+        # pattern_name = 'Profile'
+        # success_url = reverse_lazy('profile', kwargs={'pk': 'pk','slug': 'slug'})
+
+        # def get_redirect_url(self):
+        #         """
+        #         Return the URL redirect to. Keyword arguments from the URL pattern
+        #         match generating the redirect request are provided as kwargs to this
+        #         method.
+        #         """
+        #         url = reverse(self.pattern_name)
+        #         url = "%s/%s/%s" % (url, self.pk, self.slug)
+        #         return super().url
+
 
         def form_valid(self, form):
                 """
@@ -92,7 +107,6 @@ class CreateSubProjectAppriasal(CreateView):
                 self.object = form.save()
                 return super().form_valid(form)
 
-
 class UpdateSubProjectAppriasal(UpdateView):
         template_name = 'subproject/updateappriasal.html'
 
@@ -108,9 +122,10 @@ class UpdateSubProjectCloseout(UpdateView):
 class CreateProjectFund(CreateView):
         template_name ='project/fund.html'
         form_class =  ProjectFundForm
-        success_url = '/create/project'
         content_type = None 
         pk_url_kwarg = 'pk'
+        slug_url_kwarg = 'slug'
+        # success_url = reverse_lazy('profile', ['pk', 'slug'])
 
         def form_valid(self, form):
                 """

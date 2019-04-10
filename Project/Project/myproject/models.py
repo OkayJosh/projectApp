@@ -17,6 +17,7 @@ class Project(models.Model):
     def __str__(self):
         return self.slug
 
+
 class SubProject(models.Model):
     """
     This models the SubProject Registration info

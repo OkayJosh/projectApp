@@ -11,8 +11,8 @@
   {% block content %}
     <div class="row">
         <div class="container"><h5 class="bold">{{object.des}}<i> <i class="material-icons">person</i></i>{{object.owner}} <br>
-            <h5><a href={% url 'subproject' object.pk %} class=""><i class="material-icons large">loupe</i></a>
-            <a href={% url 'fund' object.pk %} class=""><i class="material-icons large">money</i></a>
+            <h5><a href="{% url 'subproject' object.pk object.slug %}" class=""><i class="material-icons large">loupe</i></a>
+            <a href="{% url 'fund' object.pk object.slug%}" class=""><i class="material-icons large">money</i></a>
             {% comment %} <a href={% url 'appriasal' %} class=""><i class="material-icons large">compare_arrows</i></a>
             <a href={% url 'closeout' %} class=""><i class="material-icons large">close</i></a></h5> {% endcomment %}
             <div class="col">
