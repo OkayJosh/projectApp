@@ -11,10 +11,10 @@ urlpatterns = [
 
     path('create/subproject/', CreateSubProjectView.as_view(), name='subproject'),
 
-    path('create/subproject/appriasal/', CreateSubProjectAppriasal.as_view(),
+    path('create/subproject/appriasal/<int:pk>/', CreateSubProjectAppriasal.as_view(),
     name='appriasal'),
 
-    path('create/subproject/closeout/', CreateSubProjectCloseout.as_view(), 
+    path('create/subproject/closeout/<int:pk>/', CreateSubProjectCloseout.as_view(), 
     name='closeout'),
 
     path('create/subproject/<int:pk>/<str:slug>/', CreateSubProjectView.as_view(), 

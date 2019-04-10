@@ -8,8 +8,15 @@ from .forms import (ProjectForm, SubProjectForm, SubProjectAppriasalForm,
 from .models import Project, SubProject
 
 
-class HomeView(TemplateView):
+class HomeView(ListView):
         template_name = 'home.html'
+        model = Project
+        content_type = None 
+
+        def get_context_data(self, **kwargs):
+                context = super().get_context_data(**kwargs)
+                context['projects'] = Project.objects.all()[:5]
+                return context
 
 class ListProjectView(ListView):
         template_name = 'project/list.html'
@@ -33,17 +40,6 @@ class CreateProjectView(CreateView):
                 self.object = form.save()
                 return super().form_valid(form)
 
-# class ProjectDetailView(DetailView)
-# class SubProjectDetailView(DetailView)
-# class SubProjectAppriasalDetailView(DetailView)
-# class SubProjectCloseoutDetailView(DetailView)
-# class ProjectFundDetailView(DetailView)
-
-# class ProfileProjectView(ProjectDetailView, SubProjectDetailView,
-#         SubProjectAppriasalDetailView, SubProjectCloseoutDetailView,
-#         ProjectFundDetailView):
-
-
 class ProfileProjectView(DetailView):
         """
         The goal is to have a one stop page for editing and veiwing project related information
@@ -56,6 +52,12 @@ class ProfileProjectView(DetailView):
         pk_url_kwarg = 'pk' 
         query_pk_and_slug = True
         slug_url_kwarg = 'slug'
+
+        def get_context_data(self, **kwargs):
+                project = Project.objects.get(id=self.kwargs['pk'])
+                context = super().get_context_data(**kwargs)
+                context['subprojects'] = SubProject.objects.filter(owned_by=project)[:5]
+                return context
 
 class CreateSubProjectView(CreateView):
         template_name = 'subproject/create.html'
@@ -100,9 +102,9 @@ class CreateSubProjectAppriasal(CreateView):
                 """
                 If the form is valid, save the associated model.
                 """
-                project = Project.objects.get(id=self.kwargs['pk']) # the pk from the urls is stored in the kwargs
+                subproject = SubProject.objects.get(id=self.kwargs['pk']) # the pk from the urls is stored in the kwargs
                 instance  = form.save(commit=False)
-                instance.owned_by = project
+                instance.owned_by = subproject
                 instance.save()
                 self.object = form.save()
                 return super().form_valid(form)
@@ -113,8 +115,9 @@ class UpdateSubProjectAppriasal(UpdateView):
 class CreateSubProjectCloseout(CreateView):
         template_name = 'subproject/closeout.html'
         form_class =  SubProjectCloseoutForm
-        success_url = 'project'
-        content_type = None 
+        success_url = '/create/project'
+        content_type = None
+        pk_url_kwarg = 'pk' 
 
 class UpdateSubProjectCloseout(UpdateView):
         template_name = 'subproject/updatecloseout.html'

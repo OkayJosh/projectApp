@@ -8,5 +8,27 @@
         <h5><a href={% url 'list' %} class="btn-floating pink darken-1"><i class="material-icons">format_list_bulleted</i></a></h5>
     </div>
   </div>
-
+  <div class="container">
+      <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>    </th>
+                </tr>
+                <tr>
+                    <th><i class="material-icons">edit</i></th>
+                    <th>Identification Number</th>
+                    <th>Owner</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for project in projects %}
+                    <tr>
+                        <td><a href="{% url 'profile' project.pk project.slug %}">{{ project }} </a> </td>
+                        <td><a><i class="">{{ project.id_num}}</i></a></td>
+                        <td><a><i class="">{{ project.owner}}</i></a></td>
+                        </tr>
+                {% endfor %}
+        </table>
+  </div>
   {% endblock heading %}
