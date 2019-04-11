@@ -25,7 +25,7 @@
                 {% for project in projects %}
                     <tr>
                         <td><a href="{% url 'profile' project.pk project.slug %}">{{ project }} </a> </td>
-                        <td><a><i class="">{{ project.id_num}}</i></a></td>
+                        <td><a href="{% url 'update_project' project.pk project.slug %}"><i class="">{{ project.id_num}}</i></a></td>
                         <td><a><i class="">{{ project.owner}}</i></a></td>
                         </tr>
                 {% endfor %}
