@@ -40,6 +40,15 @@ class CreateProjectView(CreateView):
                 self.object = form.save()
                 return super().form_valid(form)
 
+class UpdateProjectView(UpdateView):
+        model = Project
+        pk_url_kwarg = 'pk'
+        slug_url_kwarg = 'slug' 
+        query_pk_and_slug = True
+        template_name = 'project/update.html'
+        form_class = ProjectForm
+        success_url = '/create/project'
+
 class ProfileProjectView(DetailView):
         """
         The goal is to have a one stop page for editing and veiwing project related information
