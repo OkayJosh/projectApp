@@ -63,9 +63,9 @@ class ProfileProjectView(DetailView):
         slug_url_kwarg = 'slug'
 
         def get_context_data(self, **kwargs):
-                project = Project.objects.get(id=self.kwargs['pk'])
                 context = super().get_context_data(**kwargs)
-                context['subprojects'] = SubProject.objects.filter(owned_by=project)[:5]
+                context['subprojects'] = SubProject.objects.filter(
+                        owned_by=Project.objects.get(id=self.kwargs['pk']))[:5]
                 return context
 
 class CreateSubProjectView(CreateView):
@@ -93,14 +93,23 @@ class CreateSubProjectView(CreateView):
                 """
                 If the form is valid, save the associated model.
                 """
-                project = Project.objects.get(id=self.kwargs['pk']) # the pk from the urls is stored in the kwargs
+                # the pk from the urls is stored in the kwargs
                 instance  = form.save(commit=False)
-                instance.owned_by = project
+                instance.owned_by = Project.objects.get(id=self.kwargs['pk'])
                 instance.save()
                 self.object = form.save()
                 return super().form_valid(form)
 
-class CreateSubProjectAppriasal(CreateView):
+class UpdateSubProjectView(UpdateView):
+        model = SubProject
+        pk_url_kwarg = 'pk'
+        slug_url_kwarg = 'slug' 
+        query_pk_and_slug = True
+        template_name = 'subproject/subproject_update.html'
+        form_class = SubProjectForm
+        success_url = '/create/project'
+
+class CreateSubProjectAppriasalView(CreateView):
         template_name = 'subproject/appriasal.html'
         form_class =  SubProjectAppriasalForm
         success_url = '/create/project'
@@ -111,25 +120,38 @@ class CreateSubProjectAppriasal(CreateView):
                 """
                 If the form is valid, save the associated model.
                 """
-                subproject = SubProject.objects.get(id=self.kwargs['pk']) # the pk from the urls is stored in the kwargs
+                # the pk from the urls is stored in the kwargs
                 instance  = form.save(commit=False)
-                instance.owned_by = subproject
+                instance.owned_by = SubProject.objects.get(id=self.kwargs['pk'])
                 instance.save()
                 self.object = form.save()
                 return super().form_valid(form)
 
-class UpdateSubProjectAppriasal(UpdateView):
-        template_name = 'subproject/updateappriasal.html'
+class UpdateSubProjectAppriasalView(UpdateView):
+        model = SubProjectAppriasal
+        form_class =  SubProjectAppriasalForm
+        pk_url_kwarg = 'pk'
+        slug_url_kwarg = 'slug' 
+        query_pk_and_slug = True
+        template_name = 'subproject/subproject_appriasal_update.html'
+        form_class = SubProjectForm
+        success_url = '/create/project'
 
-class CreateSubProjectCloseout(CreateView):
+class CreateSubProjectCloseoutView(CreateView):
         template_name = 'subproject/closeout.html'
         form_class =  SubProjectCloseoutForm
         success_url = '/create/project'
         content_type = None
         pk_url_kwarg = 'pk' 
 
-class UpdateSubProjectCloseout(UpdateView):
-        template_name = 'subproject/updatecloseout.html'
+class UpdateSubProjectCloseoutView(UpdateView):
+        form_class =  SubProjectCloseoutForm
+        pk_url_kwarg = 'pk'
+        slug_url_kwarg = 'slug' 
+        query_pk_and_slug = True
+        template_name = 'subproject/subproject_closeout_update.html'
+        form_class = SubProjectForm
+        success_url = '/create/project'
 
 class CreateProjectFund(CreateView):
         template_name ='project/fund.html'
@@ -143,14 +165,17 @@ class CreateProjectFund(CreateView):
                 """
                 If the form is valid, save the associated model.
                 """
-                project = Project.objects.get(id=self.kwargs['pk']) # the pk from the urls is stored in the kwargs
+                # the pk from the urls is stored in the kwargs
                 instance  = form.save(commit=False)
-                instance.owned_by = project
+                instance.owned_by = Project.objects.get(id=self.kwargs['pk'])
                 instance.save()
                 self.object = form.save()
                 return super().form_valid(form)
 
 class UpdateProjectFund(UpdateView):
-                template_name ='project/updatefund.html'
-
-### i still need to implement a way in which the subproject scope will get the project in question
+        pk_url_kwarg = 'pk'
+        slug_url_kwarg = 'slug' 
+        query_pk_and_slug = True
+        template_name = 'subproject/fund_update.html'
+        form_class =  ProjectFundForm
+        success_url = '/create/project'

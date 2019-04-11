@@ -1,7 +1,7 @@
 from django.urls import path, include
 from .views import (HomeView, CreateProjectView, ListProjectView,
                         ProfileProjectView, CreateSubProjectView, 
-                        CreateSubProjectAppriasal, CreateSubProjectCloseout,
+                        CreateSubProjectAppriasalView, CreateSubProjectCloseoutView,
                         CreateProjectFund, UpdateProjectView)
 
 urlpatterns = [
@@ -11,10 +11,10 @@ urlpatterns = [
 
     path('create/subproject/', CreateSubProjectView.as_view(), name='subproject'),
 
-    path('create/subproject/appriasal/<int:pk>/', CreateSubProjectAppriasal.as_view(),
+    path('create/subproject/appriasal/<int:pk>/', CreateSubProjectAppriasalView.as_view(),
     name='appriasal'),
 
-    path('create/subproject/closeout/<int:pk>/', CreateSubProjectCloseout.as_view(), 
+    path('create/subproject/closeout/<int:pk>/', CreateSubProjectCloseoutView.as_view(), 
     name='closeout'),
 
     path('create/subproject/<int:pk>/<slug:slug>/', CreateSubProjectView.as_view(), 

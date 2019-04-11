@@ -10,7 +10,7 @@
     <div class="container"> 
          <form action="" method="post">
             {% csrf_token %}
-            {{ form }}
+            {{ form.as_p }}
             <button class="btn-floating btn-large pulse pink darken-1"> <i class="material-icons">add</i></a></button>
         </form>
     </div>
