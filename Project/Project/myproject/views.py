@@ -101,7 +101,6 @@ class CreateSubProjectView(CreateView):
                 return super().form_valid(form)
 
 class UpdateSubProjectView(UpdateView):
-        model = SubProject
         pk_url_kwarg = 'pk'
         slug_url_kwarg = 'slug' 
         query_pk_and_slug = True
@@ -128,7 +127,6 @@ class CreateSubProjectAppriasalView(CreateView):
                 return super().form_valid(form)
 
 class UpdateSubProjectAppriasalView(UpdateView):
-        model = SubProjectAppriasal
         form_class =  SubProjectAppriasalForm
         pk_url_kwarg = 'pk'
         slug_url_kwarg = 'slug' 
