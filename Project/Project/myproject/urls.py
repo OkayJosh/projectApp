@@ -1,4 +1,4 @@
-from django.urls import path, include
+from django.urls import path
 from .views import (HomeView, CreateProjectView, ListProjectView,
                         ProfileProjectView, CreateSubProjectView, 
                         CreateSubProjectAppriasalView, CreateSubProjectCloseoutView,
@@ -28,5 +28,6 @@ urlpatterns = [
 
     path('create/project/', ListProjectView.as_view(), name='list'),
 
-    path('create/project/fund/<int:pk>/<slug:slug>/', CreateProjectFund.as_view(), name='fund'),
+    path('create/project/fund/<int:pk>/<slug:slug>/', CreateProjectFund.as_view(), 
+    name='fund'),
 ]
