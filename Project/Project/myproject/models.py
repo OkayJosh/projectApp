@@ -1,21 +1,26 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.template.defaultfilters import slugify
 
 # Create your models here.
 class Project(models.Model):
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     code_num = models.IntegerField()#--------------->                                           Project Code number FGN or STA
     id_num = models.IntegerField()  #--------->                                                 Project main identification Number
+    name = models.CharField(max_length=300, default="Name of the Project", blank=True, null=True)
     slug = models.SlugField(max_length=300,
-                            verbose_name = "slug",
-                            allow_unicode = True,
-                            unique=True, default="This-is-a-new-project-title-edit-this")# --------------->                                  Project name
+                            verbose_name = "slug")# --------------->                                  Project name
     _class = models.CharField(max_length=300) #----------------->                               Classification of project
     des = models.TextField()                   #------------->                                  Description of project
     owner = models.CharField(max_length=300) #----------------------->                          Owner of the projec: the agency
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        return super(Project, self).save(*args, **kwargs)
+
+
     def __str__(self):
-        return self.slug
+        return self.name
 
 
 class SubProject(models.Model):

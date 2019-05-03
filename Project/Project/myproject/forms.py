@@ -9,7 +9,7 @@ class ProjectForm(ModelForm):
     """
     class Meta:
         model = Project
-        fields = ['code_num', 'id_num', 'slug',
+        fields = ['code_num', 'id_num', 'name',
                     '_class', 'des', 'owner']
         exclude = ['created_by',]
 
