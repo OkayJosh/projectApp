@@ -5,13 +5,13 @@ from django.template.defaultfilters import slugify
 # Create your models here.
 class Project(models.Model):
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
-    code_num = models.IntegerField()#--------------->                                           Project Code number FGN or STA
-    id_num = models.IntegerField()  #--------->                                                 Project main identification Number
+    code_number = models.IntegerField()#--------------->                                           Project Code number FGN or STA
+    identification_number = models.IntegerField()  #--------->                                                 Project main identification Number
     name = models.CharField(max_length=300, default="Name of the Project", blank=True, null=True)
     slug = models.SlugField(max_length=300,
                             verbose_name = "slug")# --------------->                                  Project name
-    _class = models.CharField(max_length=300) #----------------->                               Classification of project
-    des = models.TextField()                   #------------->                                  Description of project
+    project_class = models.CharField(max_length=300) #----------------->                               Classification of project
+    description = models.TextField()                   #------------->                                  Description of project
     owner = models.CharField(max_length=300) #----------------------->                          Owner of the projec: the agency
 
     def save(self, *args, **kwargs):
@@ -29,16 +29,16 @@ class SubProject(models.Model):
 
     """
     owned_by = models.ForeignKey(Project, on_delete=models.CASCADE)
-    spname = models.CharField(max_length=300, default="no name") #------------> sub project name
-    scode_num = models.IntegerField() #-------------->                          Sub project code number
-    id_num_beneficiary = models.CharField(max_length=300, default="no id")#     Idenfication number of beneficiary
-    sid_num = models.IntegerField() #-------------->                            Sub project identification number
+    subproject_name = models.CharField(max_length=300, default="subproject name") #------------> sub project name
+    subprject_code_number = models.IntegerField() #-------------->                          Sub project code number
+    idenfication_number_of_beneficiary = models.CharField(max_length=300, default="no id")#     Idenfication number of beneficiary
+    subproject_idenfication_number = models.IntegerField() #-------------->                            Sub project identification number
     cost = models.IntegerField()
     benefit = models.TextField() #-------------->                               The benefit of the project
-    e_start_date = models.DateField() # ------>                                 Estimated start time
-    e_close_date = models.DateField()
-    a_start_date = models.DateField()   # ----->                                Actual start time
-    a_close_date = models.DateField()
+    estimated_start_date = models.DateField() # ------>                                 Estimated start time
+    estimated_close_date = models.DateField()
+    actual_start_date = models.DateField()   # ----->                                Actual start time
+    actual_close_date = models.DateField()
     leader = models.CharField(max_length=300) #----------->                     The leader of the subproject
 
 class SubProjectAppriasal(models.Model):
@@ -47,10 +47,10 @@ class SubProjectAppriasal(models.Model):
 
     """
     owned_by = models.OneToOneField(SubProject, on_delete=models.CASCADE, blank=True, null=True) 
-    ap_date = models.DateField()    #---->                                      appriases date
+    appriase_date = models.DateField()    #---->                                      appriases date
     delay_reason = models.TextField()  
-    r_action = models.TextField()   # ---->                                     remedial action taken
-    a_name = models.CharField(max_length=300) #                                 appriaser's name
+    remedial_action = models.TextField()   # ---->                                     remedial action taken
+    appriaser_name = models.CharField(max_length=300) #                                 appriaser's name
 
 class SubProjectCloseout(models.Model):
     """
@@ -58,12 +58,12 @@ class SubProjectCloseout(models.Model):
 
     """
     owned_by = models.OneToOneField(SubProject, on_delete=models.CASCADE, blank=True, null=True) 
-    id_num = models.IntegerField()
-    sid_num = models.IntegerField() #---->                                      subproject identification number
-    close_num = models.IntegerField()
-    c_date = models.DateField()    #---->                                       closeout date
+    identification_number = models.IntegerField()
+    subproject_identification_number = models.IntegerField() #---->                                      subproject identification number
+    closeout_number = models.IntegerField()
+    closeout_date = models.DateField()    #---->                                       closeout date
     remark = models.TextField() #
-    a_name = models.CharField(max_length=300) #                                 appriaser's name
+    appriaser_name = models.CharField(max_length=300) #                                 appriaser's name
 
 class ProjectFund(models.Model):
     """

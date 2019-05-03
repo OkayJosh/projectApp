@@ -10,17 +10,17 @@
   
   {% block content %}
     <div class="row">
-        <div class="container"><h5 class="bold">{{object.des}}<i> <i class="material-icons">person</i></i>{{object.owner}} <br>
+        <div class="container"><h5 class="bold">{{object.description}}<i> <i class="material-icons">person</i></i>{{object.owner}} <br>
             <h5><a href="{% url 'subproject' object.pk object.slug %}"><i class="material-icons large">loupe</i></a>
             <a href="{% url 'fund' object.pk object.slug%}" class=""><i class="material-icons large">money</i></a></h5> 
             <div class="col">
-                <div class=""><h5>Project Code Number: {{object.code_num}}</h5></div>
+                <div class=""><h5>Project Code Number: {{object.code_number}}</h5></div>
             </div>
             <div class="col">
-                <div class=""><h5>Project identification Number: {{object.id_num}}</h5></div>
+                <div class=""><h5>Project identification Number: {{object.identification_number}}</h5></div>
             </div>
             <div class="col">  
-                <div class=""><h5>Project Classification: Hello world{% comment %}{{object._class}}{% endcomment %} </h5></div>
+                <div class=""><h5>Project Classification: {{object.project_class}} </h5></div>
             </div> 
         </div>
     </div>
@@ -41,7 +41,7 @@
                 <tbody>
                     {% for subproject in subprojects %}
                         <tr>
-                            <td><a>{{ subproject.spname }} </a> </td>
+                            <td><a>{{ subproject.subproject_name }} </a> </td>
                             <td><a href="{% url 'appriasal' subproject.id %}"><i class="material-icons">money</i></a></td>
                             <td><a href="{% url 'closeout' subproject.id %}"><i class="material-icons">close</i></a></td>
                             </tr>
