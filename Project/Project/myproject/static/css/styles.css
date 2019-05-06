@@ -6,7 +6,8 @@ body{
 
 nav{
     height: 200px;
-    clip-path: polygon(48% 0, 100% 0, 100% 100%, 0 100%);
+    box-shadow: 2px 2px 2px 2px rgb(48, 48, 139);
+    /* clip-path: polygon(48% 0, 100% 0, 100% 100%, 0 100%); */
     
 }
 nav div a i{
@@ -24,6 +25,7 @@ div h5 {
 }
 
 div h1 {
+    box-shadow: 2px 2px 2px 2px rgb(48, 48, 139);
     text-align: center;
     margin: -80px 0px 20px 0px;
     font-weight: normal;
@@ -34,7 +36,7 @@ div h1 {
 }
 
 tr{
-    height: 100px;
+    height: 50px;
     border: 12px 12px 12px 12px;
     font-size: 20px;
     box-shadow: 0px 0px 2px 0px rgb(48, 48, 139);
@@ -50,4 +52,14 @@ div form label {
     color: black;
     font-size: 20px;
     font-weight: bold;
+}
+
+.dashboard {
+    height: 40px;
+    background-color: rgb(61, 171, 223);
+    font-size: 15px;
+    text-align: center;
+    padding: 10px;
+    font-weight: bold;
+    box-shadow: 2px 2px 2px 2px rgb(48, 48, 139);
 }
