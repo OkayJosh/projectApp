@@ -13,7 +13,8 @@
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>    </th>
+                    <th></th>
+                    <th></th>
                 </tr>
                 <tr>
                     <th><i class="material-icons">edit</i></th>
@@ -25,7 +26,7 @@
                 {% for project in projects %}
                     <tr>
                         <td><a href="{% url 'profile' project.pk project.slug %}">{{ project }} </a> </td>
-                        <td><a href="{% url 'update_project' project.pk project.slug %}"><i class="">{{ project.id_num}}</i></a></td>
+                        <td><a href="{% url 'update_project' project.pk project.slug %}"><i class="">{{ project.identification_number}}</i></a></td>
                         <td><a><i class="">{{ project.owner}}</i></a></td>
                         </tr>
                 {% endfor %}
